@@ -119,6 +119,7 @@ word_counts <- by_chapter_word %>%
 word_counts
 
 # Convertimos a document-term matrix. Lo necesitamos para poder hacer LDA
+
 chapters_dtm <- word_counts %>%
   cast_dtm(document, word, n)
 
@@ -130,6 +131,7 @@ chapters_lda <- LDA(chapters_dtm, k = 4, control = list(seed = 1234))
 chapters_lda
 
 # Examinamos las probabilidades de palabras por topic (beta)
+
 chapter_topics <- tidy(chapters_lda, matrix = "beta")
 chapter_topics
 
@@ -173,7 +175,7 @@ chapters_gamma %>%
   geom_boxplot() +
   facet_wrap(~ title)
 
-# Vemos que para todos los libros, excepto "Great Expectations", estñan asociados a un solo topic. En cuanto a Great Expectations,
+# Vemos que para todos los libros, excepto "Great Expectations", están asociados a un solo topic. En cuanto a Great Expectations,
 #   parece ser que alguno de sus capítulos también se ha asociado al topic 1, aunque en su mayoría, todos son del topic 4
 
 #¿Hay algún caso en el que el tema más asociado con un capítulo perteneciera a otro libro?
